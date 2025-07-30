@@ -20,6 +20,6 @@ Example:
 ./bootlogo-patcher.sh patch
 ```
 # Credits
-## Github/Filipemendonca1978
-## Github/josuedemuniz
+## [Filipe Daniel](https://github.com/Filipemendonza1978)
+## [Josué de Muniz](https://github.com/josuedemuniz)
 
