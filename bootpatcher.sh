@@ -118,4 +118,35 @@ elif [ "$1" = "restore" ]; then
 	fi
 elif [ "$1" = "clean" ]; then
 	su -c 'rm -rf $benv'
+elif [ "$1" = "rmwarnings" ]; then
+
+	if [ -d $benv/logs ]; then
+		: > $benv/logs/log.txt
+	fi
+
+	if [ -d $benv/scripts ]; then
+		rm -rf "$benv/scripts"
+	fi
+
+	mkdir -p $benv/scripts
+	if [ ! -f $benv/scripts/warns.sh ]; then
+	cat > $benv/scripts/warns.sh <<'EOF'
+		#!/system/bin/sh
+	
+		alias 7z="/data/data/com.termux/files/usr/bin/7z"
+		benv="/data/data/com.termux/files/usr/BootPatcher"
+		rm -rf "$benv/patch"
+		mkdir -p "$benv/patch/decompress" "$benv/patch/out"			busybox echo "Backuping..."
+		dd if=/dev/block/by-name/up_param of=$benv/patch/patch.bin &>> $benv/logs/log.txt 2>&1 && dd if=/dev/block/by-name/up_param of=$benv/backup/up_param.bin &>> $benv/logs/log.txt 2>&1
+		busybox echo "Backup completed."
+		busybox echo "Removing bootloader unlocking warnings..."
+		cd "$benv/patch/decompress"
+		7z e "$benv/patch/patch.bin" &>> $benv/logs/log.txt
+		rm "./svb_orange.jpg" "./booting_warning.jpg"
+		7z a -ttar "$benv/patch/out/img.tar" "$benv/patch/decompress/*" &>> $benv/logs/log.txt && // $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
+		dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
+		busybox echo "Done! Warnings removed with success."
+EOF
+	chmod u+x $benv/scripts/warns.sh
+	su -c "/data/data/com.termux/files/usr/BootPatcher/scripts/warns.sh"
 fi
