@@ -9,6 +9,7 @@ Simple boot logo patcher for Samsung devices written in Shell. Working UI 7 and 
 
 ### Download the script:
 ```
+pkg install wget
 wget https://raw.githubusercontent.com/Filipemendonca1978/Galaxy-Boot-Logo-Patcher/refs/heads/main/bootpatcher.sh -O bootlogo-patcher.sh
 chmod +x ./bootlogo-patcher.sh
 ```
