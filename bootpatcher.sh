@@ -116,5 +116,5 @@ elif [ "$1" = "restore" ]; then
 		echo -e "\e[1;31mBackup does not exist!\e[0m"
 	fi
 elif [ "$1" = "clean" ]; then
-	rm -rf $benv
+	su -c 'rm -rf $benv'
 fi
