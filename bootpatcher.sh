@@ -59,6 +59,7 @@ elif [ "$1" = "patch" ]; then
 		cat > $benv/scripts/patch.sh <<'EOF'
 			#!/system/bin/sh
 		
+			alias 7z="/data/data/com.termux/files/usr/bin/7z"
 			benv="/data/data/com.termux/files/usr/BootPatcher"
 			rm -rf "$benv/patch"
 			mkdir -p "$benv/patch/decompress" "$benv/patch/out"
@@ -67,24 +68,24 @@ elif [ "$1" = "patch" ]; then
 			busybox echo "Backup completed."
 			busybox echo "Patching logo..."
 			cd "$benv/patch/decompress"
-			toybox tar -xf $benv/patch/patch.bin &>> $benv/logs/log.txt
+			7z e "$benv/patch/patch.bin" &>> $benv/logs/log.txt
 			if [ -f /sdcard/1st.jpg ] && [ ! -f /sdcard/2nd.jpg ]; then
 				rm ./letter.jpg
 				dd if="/sdcard/1st.jpg" of="./letter.jpg" &>> $benv/logs/log.txt
-				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
+				7z a -ttar "$benv/patch/out/img.tar" "$benv/patch/decompress/*" &>> $benv/logs/log.txt && // $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Only 1st logo was flashed."
 			elif [ ! -f /sdcard/1st.jpg ] && [ -f /sdcard/2nd.jpg ]; then
 				rm ./logo.jpg
 				dd if="/sdcard/2nd.jpg" of="./logo.jpg" &>> $benv/logs/log.txt
-				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
+				7z a -ttar "$benv/patch/out/img.tar" "$benv/patch/decompress/*" &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Only the second logo was flashed."
 			else 
 				rm ./logo.jpg && rm ./letter.jpg
 				dd if="/sdcard/2nd.jpg" of="$benv/patch/decompress/logo.jpg"
 				dd if="/sdcard/1st.jpg" of="$benv/patch/decompress/letter.jpg"
-				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &> $benv/logs/log.txt
+				7z a -ttar "$benv/patch/out/img.tar" "$benv/patch/decompress/*" &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Both logos were flashed."
 			fi
