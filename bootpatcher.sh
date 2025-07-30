@@ -31,7 +31,7 @@ echo -en "\e[0;37m"
 echo ""
 echo ""
 
-mkdir -p $benv/logs/
+	mkdir -p $benv/logs/
 echo "#BootPatcher logs, do not edit!" > $benv/logs/log.txt
 
 if [ -z "$1" ]; then
@@ -70,20 +70,20 @@ elif [ "$1" = "patch" ]; then
 			toybox tar -xf $benv/patch/patch.bin &>> $benv/logs/log.txt
 			if [ -f /sdcard/1st.jpg ] && [ ! -f /sdcard/2nd.jpg ]; then
 				rm ./letter.jpg
-				cp -f /sdcard/1st.jpg ./letter.jpg &>> $benv/logs/log.txt
+				dd if="/sdcard/1st.jpg" of="./letter.jpg" &>> $benv/logs/log.txt
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Only 1st logo was flashed."
 			elif [ ! -f /sdcard/1st.jpg ] && [ -f /sdcard/2nd.jpg ]; then
 				rm ./logo.jpg
-				cp -f /sdcard/2nd.jpg ./logo.jpg &>> $benv/logs/log.txt
+				dd if="/sdcard/2nd.jpg" of="./logo.jpg" &>> $benv/logs/log.txt
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Only the second logo was flashed."
 			else 
 				rm ./logo.jpg && rm ./letter.jpg
-				cp -f /sdcard/2nd.jpg ./logo.jpg
-				cp -f /sdcard/1st.jpg ./letter.jpg
+				dd if="/sdcard/2nd.jpg" of="$benv/patch/decompress/logo.jpg"
+				dd if="/sdcard/1st.jpg" of="$benv/patch/decompress/letter.jpg"
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
 				busybox echo "Done! Both logos were flashed."
