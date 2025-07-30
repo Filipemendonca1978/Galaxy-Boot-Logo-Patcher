@@ -32,7 +32,8 @@ echo ""
 echo ""
 
 if [ -z "$1" ]; then
-  echo "Usage: $0 {patch|restore|backup|clean}"
+  echo "Usage: "
+  echo "$0 {patch|restore|backup|clean}"
   exit 1
 
 elif [ "$1" = "patch" ]; then
