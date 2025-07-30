@@ -31,6 +31,9 @@ echo -en "\e[0;37m"
 echo ""
 echo ""
 
+mkdir -p $benv/logs/
+echo "#BootPatcher logs, do not edit!" > $benv/logs/log.txt
+
 if [ -z "$1" ]; then
   echo "Usage: "
   echo "$0 {patch|restore|backup|clean}"
@@ -50,9 +53,6 @@ elif [ "$1" = "patch" ]; then
 	if [ -d $benv/scripts ]; then
 		rm -rf "$benv/scripts"
 	fi
-	
-	mkdir -p $benv/logs/
-	echo "#BootPatcher logs, do not edit!" > $benv/logs/log.txt
 
 	mkdir -p $benv/scripts
 	if [ ! -f $benv/scripts/patch.sh ]; then
@@ -63,7 +63,7 @@ elif [ "$1" = "patch" ]; then
 			rm -rf "$benv/patch"
 			mkdir -p "$benv/patch/decompress" "$benv/patch/out"
 			busybox echo "Backuping..."
-			dd if=/dev/block/by-name/up_param of=$benv/patch/patch.bin &>> $benv/logs/log.txt 2>&1 && dd if=/dev/block/by-name/up_param of=$benv/backup/up_param.bin &> $benv/logs/log.txt 2>&1
+			dd if=/dev/block/by-name/up_param of=$benv/patch/patch.bin &>> $benv/logs/log.txt 2>&1 && dd if=/dev/block/by-name/up_param of=$benv/backup/up_param.bin &>> $benv/logs/log.txt 2>&1
 			busybox echo "Backup completed."
 			busybox echo "Patching logo..."
 			cd "$benv/patch/decompress"
@@ -99,7 +99,7 @@ EOF
 elif [ "$1" = "backup" ]; then
 	echo "Backuping"
 	if [ ! -f $benv/backup/up_param.bin ]; then
-		su -c "dd if=/dev/block/by-name/up_param of=/data/data/com.termux/files/usr/BootPatcher/backup/up_param.bin" &>> $benv/logs/log.txt 2>&1
+		su -c 'dd if=/dev/block/by-name/up_param of=/data/data/com.termux/files/usr/BootPatcher/backup/up_param.bin' &>> $benv/logs/log.txt 2>&1
 		echo -e "\e[1;32mBackup completed!\e[0m"
 	else 
 		echo "Error!"
