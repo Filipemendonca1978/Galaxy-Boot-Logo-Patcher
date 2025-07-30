@@ -21,7 +21,7 @@ fi
 clear
 echo -en "\e[1;36m"
 echo "     ____________________"
-echo "     Samsung Boot Logo Patcher"
+echo "     Galaxy Boot Logo Patcher"
 echo "          ____________________"
 echo -e "     By: Filipe Daniel and ${verde}Josué de Muniz"
 echo -e "         @filipe13         ${verde}@josuedemuniz"
