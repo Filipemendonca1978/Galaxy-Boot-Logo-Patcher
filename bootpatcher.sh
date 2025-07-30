@@ -5,7 +5,7 @@
 #@filipe13
 #Special thanks to @josuedemuniz
 
-verde="\e[32;1m"
+verde='\e[32;1m'
 export benv="/data/data/com.termux/files/usr/BootPatcher"
 
 mkdir -p "$benv/backup"
@@ -23,8 +23,8 @@ echo -en "\e[1;36m"
 echo "     ____________________"
 echo "     Samsung Boot Logo Patcher"
 echo "          ____________________"
-echo -e "     By: Filipe Daniel and $verdeJosué de Muniz"
-echo -e "         @filipe13         $verde@josuedemuniz"
+echo -e "     By: Filipe Daniel and ${verde}Josué de Muniz"
+echo -e "         @filipe13         ${verde}@josuedemuniz"
 echo -en "\e[1;36m"
 echo "     ----------"
 echo -en "\e[0;37m"
