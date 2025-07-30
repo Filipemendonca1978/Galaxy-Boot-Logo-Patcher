@@ -46,7 +46,7 @@ elif [ "$1" = "patch" ]; then
 		rm -rf "$benv/scripts"
 	fi
 	
-	mkdir $benv/logs/
+	mkdir -p $benv/logs/
 	echo "#BootPatcher logs, do not edit!" > $benv/logs/log.txt
 
 	mkdir -p $benv/scripts
@@ -68,20 +68,20 @@ elif [ "$1" = "patch" ]; then
 				cp -f /sdcard/1st.jpg ./letter.jpg &>> $benv/logs/log.txt
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
-				busybox echo "Done!"
+				busybox echo "Done! Only 1st logo was flashed."
 			elif [ ! -f /sdcard/1st.jpg ] && [ -f /sdcard/2nd.jpg ]; then
 				rm ./logo.jpg
 				cp -f /sdcard/2nd.jpg ./logo.jpg &>> $benv/logs/log.txt
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &>> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
-				busybox echo "Done!"
+				busybox echo "Done! Only the second logo was flashed."
 			else 
 				rm ./logo.jpg && rm ./letter.jpg
 				cp -f /sdcard/2nd.jpg ./logo.jpg
 				cp -f /sdcard/1st.jpg ./letter.jpg
 				toybox tar -cf "$benv/patch/out/img.tar" -C "$benv/patch/decompress" . &>> $benv/logs/log.txt && cp $benv/patch/out/* /sdcard &> $benv/logs/log.txt
 				dd if=$benv/patch/out/img.tar of=/dev/block/by-name/up_param &>> $benv/logs/log.txt 2>&1
-				busybox echo "Done!"
+				busybox echo "Done! Both logos were flashed."
 			fi
 EOF
 	fi
