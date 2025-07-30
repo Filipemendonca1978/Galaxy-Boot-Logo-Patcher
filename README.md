@@ -1,5 +1,5 @@
 # Galaxy-Boot-Logo-Patcher
-Simple boot logo patcher for Samsung devices written in Shell. Working UI 7 and 8
+Simple boot logo changer for Samsung devices written in Shell. Working UI 7 and 8
 
 ## To run:
 - Make sure you are on Termux with root access
