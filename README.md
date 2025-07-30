@@ -19,3 +19,7 @@ Example:
 ```
 ./bootlogo-patcher.sh patch
 ```
+# Credits
+## Github/Filipemendonca1978
+## Github/josuedemuniz
+
