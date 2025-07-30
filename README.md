@@ -2,3 +2,19 @@
 Simple boot logo patcher for Samsung devices written in Shell. Working UI 7 and 8
 
 ## To run:
+- Make sure you are on Termux with root access
+- Put your(s) JPEG('s) on internal storage as "1st.jpg" or "2nd.jpg"
+- 1st is the first splash screen (Samsung logo)
+- 2nd is the second splash screen (Samsung Galaxy Secured By Knox)
+
+### Download the script:
+```
+wget https://raw.githubusercontent.com/Filipemendonca1978/Galaxy-Boot-Logo-Patcher/refs/heads/main/bootpatcher.sh -O bootlogo-patcher.sh
+chmod +x ./bootlogo-patcher.sh
+```
+### Execute it:
+#### Usage: patch|backup|restore|clean
+Example:
+```
+./bootlogo-patcher.sh patch
+```
