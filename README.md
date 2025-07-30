@@ -15,7 +15,14 @@ wget https://raw.githubusercontent.com/Filipemendonca1978/Galaxy-Boot-Logo-Patch
 chmod +x ./bootlogo-patcher.sh
 ```
 ### Execute it:
-#### Usage: patch|backup|restore|clean
+#### Usage: patch|backup|restore|clean|rmwarnings
+``
+patch: change logo
+backup: backup logo
+restore: restore old logo
+clean: clean scripts environment
+rmwarnings: remove unlocked bootloader warnings
+``
 Example:
 ```
 ./bootlogo-patcher.sh patch
