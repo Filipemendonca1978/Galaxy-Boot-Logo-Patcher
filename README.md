@@ -16,13 +16,13 @@ chmod +x ./bootlogo-patcher.sh
 ```
 ### Execute it:
 #### Usage: patch|backup|restore|clean|rmwarnings
-``
+```
 patch: change logo
 backup: backup logo
 restore: restore old logo
 clean: clean scripts environment
 rmwarnings: remove unlocked bootloader warnings
-``
+```
 Example:
 ```
 ./bootlogo-patcher.sh patch
