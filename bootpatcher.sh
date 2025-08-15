@@ -36,7 +36,7 @@ echo "#BootPatcher logs, do not edit!" > $benv/logs/log.txt
 
 if [ -z "$1" ]; then
   echo "Usage: "
-  echo "$0 {patch|restore|backup|clean}"
+  echo "$0 {patch|restore|backup|clean|rmwarnings}"
   exit 1
 
 elif [ "$1" = "patch" ]; then
@@ -149,4 +149,5 @@ elif [ "$1" = "rmwarnings" ]; then
 EOF
 	chmod u+x $benv/scripts/warns.sh
 	su -c "/data/data/com.termux/files/usr/BootPatcher/scripts/warns.sh"
-fi
+	fi
+ fi
