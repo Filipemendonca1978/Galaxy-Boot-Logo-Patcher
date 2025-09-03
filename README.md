@@ -1,5 +1,5 @@
 # 🔧 Galaxy Boot Logo Patcher 
-A simple tool written in Shell that can change bootlogo on Samsung devices. Working UI 7 and 8
+A simple tool written in Shell that can change bootlogo on Samsung devices. Works on any rom
 
 ## ⚙️ To run:
 - Make sure you are on Termux with root access
