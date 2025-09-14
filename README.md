@@ -29,5 +29,5 @@ Example:
 ```
 # 🙏 Credits
 ## [Filipe Daniel](https://github.com/Filipemendonca1978)
-## [Josué de Muniz](https://link.tree/josuedemuniz)
+## [Josué de Muniz](https://linktr.ee/josuedemuniz)
 
